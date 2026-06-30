@@ -6,6 +6,9 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   web-deploy:
     name: Deploy
@@ -25,6 +28,17 @@ jobs:
     - name: Build Project
       run: npm run build
       
+    - name: Deploy build to prod branch
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
+        destination_branch: prod
+        publish_branch: prod
+        force_orphan: true
+        user_name: github-actions
+        user_email: github-actions@github.com
+        
     - name: Sync files to Hostinger FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.4.0
       with:

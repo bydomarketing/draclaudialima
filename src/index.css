@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #F8F6F4;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: #1C1C1C;
+  overflow-x: hidden;
+}
+
+/* Smooth transitions for links and buttons */
+a, button {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom Card Hover Effect for Differential section */
+.differential-card {
+  background-color: #ffffff;
+  border-color: rgba(231, 229, 228, 0.55); /* border-stone-200/55 */
+  transition:
+    background 0.35s ease,
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
+}
+
+.differential-card .diff-icon-holder {
+  background-color: #FAF0EE;
+  transition: background-color 0.35s ease;
+}
+
+.differential-card .diff-icon {
+  color: #C6002B;
+  transition: color 0.35s ease;
+}
+
+.differential-card .diff-title {
+  color: #1c1917; /* text-stone-900 */
+  transition: color 0.35s ease;
+}
+
+.differential-card .diff-desc {
+  color: #57534e; /* text-stone-600 */
+  transition: color 0.35s ease;
+}
+
+/* Hover effects for desktop */
+@media (hover: hover) {
+  .differential-card:hover {
+    background: linear-gradient(135deg, #FAF0EE 0%, #F8F6F4 100%) !important;
+    border-color: rgba(198, 0, 43, 0.4) !important; /* #C6002B with 40% opacity */
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02); /* elegant soft shadow */
+  }
+
+  .differential-card:hover .diff-icon-holder {
+    background-color: #C6002B !important;
+  }
+
+  .differential-card:hover .diff-icon {
+    color: #ffffff !important;
+  }
+
+  .differential-card:hover .diff-title {
+    color: #C6002B !important;
+  }
+
+  .differential-card:hover .diff-desc {
+    color: #1c1917 !important;
+  }
+}
+
+/* Active and focus-visible states for mobile / keyboard navigation */
+.differential-card:active,
+.differential-card:focus-visible {
+  background: linear-gradient(135deg, #FAF0EE 0%, #F8F6F4 100%) !important;
+  border-color: rgba(198, 0, 43, 0.4) !important;
+  outline: none;
+}
+
+.differential-card:active .diff-icon-holder,
+.differential-card:focus-visible .diff-icon-holder {
+  background-color: #C6002B !important;
+}
+
+.differential-card:active .diff-icon,
+.differential-card:focus-visible .diff-icon {
+  color: #ffffff !important;
+}
+
+.differential-card:active .diff-title,
+.differential-card:focus-visible .diff-title {
+  color: #C6002B !important;
+}
+
+.differential-card:active .diff-desc,
+.differential-card:focus-visible .diff-desc {
+  color: #1c1917 !important;
+}
+
+/* Support accessibility prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .differential-card {
+    transition: none !important;
+    transform: none !important;
+  }
+  .differential-card .diff-icon-holder,
+  .differential-card .diff-icon,
+  .differential-card .diff-title,
+  .differential-card .diff-desc {
+    transition: none !important;
+  }
+}

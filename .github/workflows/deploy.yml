@@ -1,4 +1,4 @@
-name: Deploy to Hostinger
+name: Build and Update prod branch
 
 on:
   push:
@@ -10,11 +10,11 @@ permissions:
   contents: write
 
 jobs:
-  web-deploy:
-    name: Deploy
+  build-and-deploy:
+    name: Build and push to prod
     runs-on: ubuntu-latest
     steps:
-    - name: Get latest code
+    - name: Checkout
       uses: actions/checkout@v5
       
     - name: Setup Node.js
@@ -22,13 +22,13 @@ jobs:
       with:
         node-version: '22'
         
-    - name: Install Dependencies
+    - name: Install dependencies
       run: npm install
       
-    - name: Build Project
+    - name: Build project
       run: npm run build
       
-    - name: Deploy build to prod branch
+    - name: Push build to prod branch
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -38,12 +38,3 @@ jobs:
         force_orphan: true
         user_name: github-actions
         user_email: github-actions@github.com
-        
-    - name: Sync files to Hostinger FTP
-      uses: SamKirkland/FTP-Deploy-Action@v4.4.0
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./dist/
-        server-dir: public_html/clientes/draclaudialima/
